@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_indicator/page_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../account/register_screen.dart';
 import '../config.dart';
 
 import '../../widgets/single_tip.dart';
@@ -33,15 +34,31 @@ class _TipsState extends State<Tips> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height / 5;
+    double height = MediaQuery.of(context).size.height / 6;
 
     return Scaffold(
-      body: Container(
-        color: Colors.white,
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            SizedBox(height: height * 0.4),
+            GestureDetector(
+              child: Container(
+                padding: const EdgeInsets.only(right: 30),
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'دخول',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: primaryColor,
+                    fontFamily: 'Cairo',
+                  ),
+                ),
+              ),
+            ),
             Container(
-              height: height * 3.6,
+              height: height * 3.4,
               child: PageIndicatorContainer(
                 shape: IndicatorShape.circle(),
                 align: IndicatorAlign.bottom,
@@ -72,7 +89,15 @@ class _TipsState extends State<Tips> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) {
+                                return RegisterScreen();
+                              },
+                            ),
+                          );
+                        },
                         child: Container(
                           alignment: Alignment.center,
                           padding: const EdgeInsets.symmetric(
@@ -88,6 +113,7 @@ class _TipsState extends State<Tips> {
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Cairo',
                             ),
                           ),
                         ),
@@ -116,6 +142,7 @@ class _TipsState extends State<Tips> {
                                   color: Colors.black,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
+                                  fontFamily: 'Cairo',
                                 ),
                               ),
                             ],

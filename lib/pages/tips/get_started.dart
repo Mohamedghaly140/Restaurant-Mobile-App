@@ -19,6 +19,7 @@ class _GetStartedState extends State<GetStarted> {
         child: Column(
           children: <Widget>[
             Container(
+              padding: EdgeInsets.all(20),
               height: height * 2,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -42,8 +43,8 @@ class _GetStartedState extends State<GetStarted> {
                   ),
                 ],
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
                 ),
               ),
               child: ListView(

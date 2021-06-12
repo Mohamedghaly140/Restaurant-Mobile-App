@@ -32,21 +32,25 @@ class SingleTip extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 5),
           child: Text(
             title,
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: primaryColor,
+              fontFamily: 'Cairo',
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             info,
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.grey,
+              fontFamily: 'Cairo',
             ),
           ),
         ),
