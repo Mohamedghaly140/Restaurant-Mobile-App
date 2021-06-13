@@ -9,6 +9,20 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool _secureText = false;
+  final _phoneFocusNode = FocusNode();
+  final _formKey = GlobalKey<FormState>();
+  String _emailValue = '';
+
+  void _saveForm() {
+    final isValid = _formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+    _formKey.currentState!.save();
+    print(_emailValue);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               Expanded(
                 child: Form(
+                  key: _formKey,
                   child: ListView(
                     children: [
                       Container(
@@ -55,111 +70,153 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 15),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 20,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                        ),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'الأسم الكامل',
-                            border: InputBorder.none,
-                            hintTextDirection: TextDirection.rtl,
+                      TextFormField(
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          hintText: 'الأسم الكامل',
+                          hintTextDirection: TextDirection.rtl,
+                          prefixIcon: Icon(
+                            Icons.person_outline,
+                            color: Colors.black,
                           ),
-                          validator: (value) {
-                            if (value!.isEmpty || value.length < 4) {
-                              return 'برجاء ادخال الأسم الكامل';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 15),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 20,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                        ),
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            hintText: 'البريد الإلكتروني',
-                            border: InputBorder.none,
-                            hintTextDirection: TextDirection.rtl,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(25),
                           ),
-                          validator: (value) {
-                            if (value!.isEmpty ||
-                                !value.contains('@') ||
-                                !value.contains('.')) {
-                              return 'برجاء ادخال البريد الإلكتروني صحيح';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 15),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 20,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                        ),
-                        child: TextFormField(
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            hintText: 'كلمة المرور',
-                            border: InputBorder.none,
-                            hintTextDirection: TextDirection.rtl,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: primaryColor),
+                            borderRadius: BorderRadius.circular(25),
                           ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'برجاء ادخال كلمة المرور ';
-                            } else if (value.length <= 6) {
-                              return 'برجاء ادخال كلمة المرور اكثر من 6 حروف ';
-                            }
-                            return null;
-                          },
+                          fillColor: Colors.white,
+                          filled: true,
+                          contentPadding: EdgeInsets.fromLTRB(10, 15, 15, 10),
                         ),
+                        validator: (value) {
+                          if (value!.isEmpty || value.length < 4) {
+                            return 'برجاء ادخال الأسم الكامل';
+                          }
+                          return null;
+                        },
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 15),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 20,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                        ),
-                        child: TextFormField(
-                          keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
-                            hintText: 'رقم الهاتف',
-                            border: InputBorder.none,
-                            hintTextDirection: TextDirection.rtl,
+                      SizedBox(height: 20),
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          hintText: 'البريد الإلكتروني',
+                          hintTextDirection: TextDirection.rtl,
+                          prefixIcon: Icon(
+                            Icons.email_outlined,
+                            color: Colors.black,
                           ),
-                          validator: (value) {
-                            if (value!.isEmpty || value.length < 4) {
-                              return 'برجاء ادخال رقم هاتف صحيح ';
-                            }
-                            return null;
-                          },
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: primaryColor),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          contentPadding: EdgeInsets.fromLTRB(10, 15, 15, 10),
                         ),
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !value.contains('@') ||
+                              !value.contains('.')) {
+                            return 'برجاء ادخال البريد الإلكتروني صحيح';
+                          }
+                          return null;
+                        },
                       ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        keyboardType: TextInputType.visiblePassword,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          hintText: 'كلمة المرور',
+                          hintTextDirection: TextDirection.rtl,
+                          prefixIcon: Icon(
+                            Icons.security_outlined,
+                            color: Colors.black,
+                          ),
+                          suffixIcon: IconButton(
+                            disabledColor: Colors.transparent,
+                            onPressed: () {
+                              setState(() {
+                                _secureText = !_secureText;
+                              });
+                            },
+                            icon: Icon(
+                              _secureText
+                                  ? Icons.visibility_off_outlined
+                                  : Icons.visibility_outlined,
+                              color: Colors.black,
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: primaryColor),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          contentPadding: EdgeInsets.fromLTRB(10, 15, 15, 10),
+                        ),
+                        obscureText: _secureText,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'برجاء ادخال كلمة المرور ';
+                          } else if (value.length <= 6) {
+                            return 'برجاء ادخال كلمة المرور اكثر من 6 حروف ';
+                          }
+                          return null;
+                        },
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).requestFocus(_phoneFocusNode);
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        keyboardType: TextInputType.phone,
+                        textInputAction: TextInputAction.done,
+                        decoration: InputDecoration(
+                          hintText: 'رقم الهاتف',
+                          hintTextDirection: TextDirection.rtl,
+                          prefixIcon: Icon(
+                            Icons.phone_iphone_outlined,
+                            color: Colors.black,
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: primaryColor),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          contentPadding: EdgeInsets.fromLTRB(10, 15, 15, 10),
+                        ),
+                        focusNode: _phoneFocusNode,
+                        validator: (value) {
+                          if (value!.isEmpty || value.length < 4) {
+                            return 'برجاء ادخال رقم هاتف صحيح ';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
                       MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _saveForm();
+                        },
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 4),
                           width: double.infinity,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../account/register_screen.dart';
 import '../config.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -9,6 +8,18 @@ class ForgetPasswordScreen extends StatefulWidget {
 }
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
+  String _emailValue = '';
+
+  void _saveForm() {
+    final isValid = _formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+    _formKey.currentState!.save();
+    print(_emailValue);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +48,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             children: [
               Expanded(
                 child: Form(
+                  key: _formKey,
                   child: ListView(
                     children: [
                       Container(
@@ -71,36 +83,50 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           ),
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 15),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 20,
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        style: TextStyle(
+                          color: Colors.black,
                         ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                        ),
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            hintText: 'البريد الإلكتروني',
-                            border: InputBorder.none,
-                            hintTextDirection: TextDirection.rtl,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.email_outlined,
+                            color: Colors.black,
                           ),
-                          validator: (value) {
-                            if (value!.isEmpty ||
-                                !value.contains('@') ||
-                                !value.contains('.')) {
-                              return 'برجاء ادخال البريد الإلكتروني صحيح';
-                            }
-                            return null;
-                          },
+                          hintText: 'البريد الإلكتروني',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: primaryColor),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          hintTextDirection: TextDirection.rtl,
+                          fillColor: Colors.white,
+                          filled: true,
+                          contentPadding: EdgeInsets.fromLTRB(10, 15, 15, 10),
                         ),
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !value.contains('@') ||
+                              !value.contains('.')) {
+                            return 'برجاء ادخال البريد الإلكتروني صحيح';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _emailValue = value!;
+                        },
+                        onFieldSubmitted: (_) {
+                          _saveForm();
+                        },
                       ),
                       SizedBox(height: 20),
                       MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _saveForm();
+                        },
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 4),
                           width: double.infinity,

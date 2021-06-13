@@ -103,6 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   border: InputBorder.none,
                                   hintTextDirection: TextDirection.rtl,
                                 ),
+                                obscureText: true,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'برجاء ادخال كلمة المرور ';
