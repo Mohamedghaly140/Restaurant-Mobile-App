@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../account/login_screen.dart';
+import '../account/forget_password_screen.dart';
+import '../account/register_screen.dart';
 import '../config.dart';
 
-class RegisterScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +42,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       Container(
                         margin: const EdgeInsets.only(
-                          bottom: 15,
+                          bottom: 20,
                           right: 10,
                         ),
                         child: Text(
-                          'انشاء حساب جديد',
+                          'تسجيل الدخول الي حسابك',
                           textAlign: TextAlign.right,
                           style: TextStyle(
                             fontSize: 22,
@@ -53,30 +54,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             color: primaryColor,
                             fontFamily: 'Cairo',
                           ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 15),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 20,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                        ),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'الأسم الكامل',
-                            border: InputBorder.none,
-                            hintTextDirection: TextDirection.rtl,
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty || value.length < 4) {
-                              return 'برجاء ادخال الأسم الكامل';
-                            }
-                            return null;
-                          },
                         ),
                       ),
                       Container(
@@ -116,48 +93,50 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white,
                         ),
-                        child: TextFormField(
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            hintText: 'كلمة المرور',
-                            border: InputBorder.none,
-                            hintTextDirection: TextDirection.rtl,
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'برجاء ادخال كلمة المرور ';
-                            } else if (value.length <= 6) {
-                              return 'برجاء ادخال كلمة المرور اكثر من 6 حروف ';
-                            }
-                            return null;
-                          },
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                keyboardType: TextInputType.visiblePassword,
+                                decoration: InputDecoration(
+                                  hintText: 'كلمة المرور',
+                                  border: InputBorder.none,
+                                  hintTextDirection: TextDirection.rtl,
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'برجاء ادخال كلمة المرور ';
+                                  } else if (value.length <= 6) {
+                                    return 'برجاء ادخال كلمة المرور اكثر من 6 حروف ';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) {
+                                      return ForgetPasswordScreen();
+                                    },
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'نسيت كلمة المرور ؟',
+                                style: TextStyle(
+                                  fontFamily: 'Cairo',
+                                  color: primaryColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 15),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 20,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                        ),
-                        child: TextFormField(
-                          keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
-                            hintText: 'رقم الهاتف',
-                            border: InputBorder.none,
-                            hintTextDirection: TextDirection.rtl,
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty || value.length < 4) {
-                              return 'برجاء ادخال رقم هاتف صحيح ';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
+                      SizedBox(height: 20),
                       MaterialButton(
                         onPressed: () {},
                         child: Container(
@@ -169,26 +148,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             borderRadius: BorderRadius.circular(25),
                           ),
                           child: Text(
-                            'تسجيل',
+                            'تسجيل الدخول',
                             style: TextStyle(
                               fontFamily: 'Cairo',
                               color: Colors.white,
                               fontSize: 18,
                             ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        margin: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          'عند الضغط علي الشروط و الأحكام انت توافق علي قوانين التطبيق',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Cairo',
-                            color: Colors.black,
-                            fontSize: 16,
                           ),
                         ),
                       ),
@@ -201,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'اذا لديك حساب بالفعل ؟',
+                      'ليس لديك حساب ؟',
                       style: TextStyle(
                         fontFamily: 'Cairo',
                         color: Colors.black,
@@ -214,13 +179,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (_) {
-                              return LoginScreen();
+                              return RegisterScreen();
                             },
                           ),
                         );
                       },
                       child: Text(
-                        'سجل الدخول الأن',
+                        'انشأ حساب جديد',
                         style: TextStyle(
                           fontFamily: 'Cairo',
                           color: primaryColor,

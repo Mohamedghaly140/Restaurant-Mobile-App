@@ -17,28 +17,25 @@ class SingleTip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        SizedBox(height: MediaQuery.of(context).size.height * 0.1),
         Container(
           alignment: Alignment.center,
           child: Image.asset(
             imageUrl,
             fit: BoxFit.cover,
+            alignment: Alignment.center,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 5),
-          child: Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: primaryColor,
-              fontFamily: 'Cairo',
-            ),
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: primaryColor,
+            fontFamily: 'Cairo',
           ),
         ),
         Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_indicator/page_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:resturant/pages/account/login_screen.dart';
 import '../account/register_screen.dart';
 import '../config.dart';
 
@@ -42,6 +43,15 @@ class _TipsState extends State<Tips> {
           children: <Widget>[
             SizedBox(height: height * 0.4),
             GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) {
+                      return LoginScreen();
+                    },
+                  ),
+                );
+              },
               child: Container(
                 padding: const EdgeInsets.only(right: 30),
                 alignment: Alignment.centerRight,
@@ -58,7 +68,7 @@ class _TipsState extends State<Tips> {
               ),
             ),
             Container(
-              height: height * 3.4,
+              height: height * 3.6,
               child: PageIndicatorContainer(
                 shape: IndicatorShape.circle(),
                 align: IndicatorAlign.bottom,
@@ -80,7 +90,7 @@ class _TipsState extends State<Tips> {
               ),
             ),
             Container(
-              height: height * 1.4,
+              height: height * 1.2,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ListView(
                 children: <Widget>[
