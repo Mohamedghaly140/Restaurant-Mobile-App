@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../account/forget_password_screen.dart';
 import '../account/register_screen.dart';
+import '../home/home_screen.dart';
 import '../config.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -139,7 +140,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: 20),
                       MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (_) {
+                              return HomeScreen();
+                            }),
+                          );
+                        },
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 4),
                           width: double.infinity,

@@ -52,6 +52,7 @@ flutter:
     - assets/images/tip1.png
     - assets/images/tip2.png
     - assets/images/tip3.png
+    - assets/images/profile.png
     # -----Categories--------
     - assets/images/category/cat1.png
     - assets/images/category/cat2.png
