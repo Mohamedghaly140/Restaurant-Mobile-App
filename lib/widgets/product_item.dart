@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../pages/config.dart';
+import '../pages/product/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
   final String prodId;
@@ -22,13 +23,29 @@ class ProductItem extends StatelessWidget {
         children: [
           Stack(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.asset(
-                  imageUrl,
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return ProductDetailScreen(
+                          prodId,
+                          imageUrl,
+                          title,
+                          duration,
+                        );
+                      },
+                    ),
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.asset(
+                    imageUrl,
+                    height: 200,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Positioned(
