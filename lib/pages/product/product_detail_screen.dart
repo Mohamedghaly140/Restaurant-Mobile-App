@@ -145,12 +145,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Text(
-                      'عنوان الطعام',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        fontFamily: 'Cairo',
-                        fontSize: 22,
+                    Container(
+                      width: double.infinity,
+                      child: Text(
+                        'عنوان الطعام',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontFamily: 'Cairo',
+                          fontSize: 22,
+                        ),
                       ),
                     ),
                     Padding(
@@ -203,6 +206,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         color: Colors.grey[600],
                       ),
                     ),
+                    Container(
+                      width: double.infinity,
+                      child: Text(
+                        'وقت التوصيل',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontFamily: 'Cairo',
+                          fontSize: 22,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.timer),
+                        SizedBox(width: 5),
+                        Text(
+                          '${widget.duration} دقيقة',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontFamily: 'Cairo',
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
