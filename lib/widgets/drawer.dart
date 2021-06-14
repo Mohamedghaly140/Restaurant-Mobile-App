@@ -13,11 +13,17 @@ class _SideDrawerState extends State<SideDrawer> {
     return Drawer(
       child: Directionality(
         textDirection: TextDirection.rtl,
-        child: ListView(
+        child: Column(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text('Mohamed Ghaly'),
-              accountEmail: Text('mohamedghaly140@gmail.com'),
+              accountName: Text(
+                'Mohamed Ghaly',
+                style: TextStyle(color: Colors.black),
+              ),
+              accountEmail: Text(
+                'mohamedghaly140@gmail.com',
+                style: TextStyle(color: Colors.grey[600]),
+              ),
               decoration: BoxDecoration(color: Colors.grey[300]),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/profile.png'),
@@ -26,6 +32,8 @@ class _SideDrawerState extends State<SideDrawer> {
             DrawerItem('الرئيسية', Icons.home_outlined),
             DrawerItem('حسابي', Icons.person_outline),
             DrawerItem('المفضلة', Icons.favorite_border_outlined),
+            Spacer(),
+            DrawerItem('تسجيل الخروج', Icons.logout_outlined),
           ],
         ),
       ),

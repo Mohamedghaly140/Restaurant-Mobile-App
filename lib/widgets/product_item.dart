@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../pages/config.dart';
 
-class MealItem extends StatelessWidget {
-  final String mealId;
+class ProductItem extends StatelessWidget {
+  final String prodId;
   final String title;
   final String imageUrl;
   final String duration;
 
-  MealItem(this.mealId, this.imageUrl, this.title, this.duration);
+  ProductItem(this.prodId, this.imageUrl, this.title, this.duration);
 
   @override
   Widget build(BuildContext context) {
