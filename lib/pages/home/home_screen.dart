@@ -70,131 +70,140 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _drawerKey,
       endDrawer: SideDrawer(),
       backgroundColor: Colors.white,
-      body: Directionality(
-        textDirection: TextDirection.rtl,
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: 15,
-              horizontal: 25,
-            ),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'توصيل الطلب الي',
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                      fontFamily: 'Cairo',
-                      fontSize: 15,
-                    ),
-                  ),
+      body: SafeArea(
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: GestureDetector(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },
+            child: SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 25,
                 ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'موقع العميل',
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        'توصيل الطلب الي',
                         style: TextStyle(
-                          fontSize: 18,
+                          color: Colors.grey[600],
                           fontFamily: 'Cairo',
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
                         ),
                       ),
-                      Icon(
-                        Icons.keyboard_arrow_down,
-                        color: primaryColor,
-                        size: 26,
+                    ),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'موقع العميل',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Cairo',
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(
+                            Icons.keyboard_arrow_down,
+                            color: primaryColor,
+                            size: 26,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          textDirection: TextDirection.rtl,
-                          textInputAction: TextInputAction.done,
-                          decoration: InputDecoration(
-                            hintText: 'بحــث',
-                            hintStyle: TextStyle(color: Colors.black),
-                            prefixIcon: Icon(
-                              Icons.search,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              textDirection: TextDirection.rtl,
+                              textInputAction: TextInputAction.done,
+                              decoration: InputDecoration(
+                                hintText: 'بحــث',
+                                hintStyle: TextStyle(color: Colors.black),
+                                prefixIcon: Icon(
+                                  Icons.search,
+                                  color: primaryColor,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                hintTextDirection: TextDirection.rtl,
+                                fillColor: Colors.grey[200],
+                                filled: true,
+                                contentPadding: EdgeInsets.all(10),
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              _drawerKey.currentState!.openEndDrawer();
+                            },
+                            icon: Icon(
+                              Icons.menu,
+                              size: 26,
                               color: primaryColor,
                             ),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            hintTextDirection: TextDirection.rtl,
-                            fillColor: Colors.grey[200],
-                            filled: true,
-                            contentPadding: EdgeInsets.all(10),
                           ),
-                        ),
+                        ],
                       ),
-                      IconButton(
-                        onPressed: () {
-                          _drawerKey.currentState!.openEndDrawer();
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 20),
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _categoryItems.length,
+                        itemBuilder: (ctx, i) {
+                          return CategoryItem(
+                            _categoryItems[i]['id'],
+                            _categoryItems[i]['imageUrl'],
+                            _categoryItems[i]['title'],
+                          );
                         },
-                        icon: Icon(
-                          Icons.menu,
-                          size: 26,
-                          color: primaryColor,
-                        ),
                       ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  width: MediaQuery.of(context).size.width,
-                  height: 100,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _categoryItems.length,
-                    itemBuilder: (ctx, i) {
-                      return CategoryItem(
-                        _categoryItems[i]['id'],
-                        _categoryItems[i]['imageUrl'],
-                        _categoryItems[i]['title'],
-                      );
-                    },
-                  ),
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.522,
-                  child: ListView(
-                    children: [
-                      ProductItem(
-                        '1',
-                        'assets/images/product/pro1.jpg',
-                        'هوليود ستارز كافية',
-                        '20 - 30',
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.55,
+                      child: ListView(
+                        children: [
+                          ProductItem(
+                            '1',
+                            'assets/images/product/pro1.jpg',
+                            'هوليود ستارز كافية',
+                            '20 - 30',
+                          ),
+                          ProductItem(
+                            '1',
+                            'assets/images/product/pro2.jpg',
+                            'هوليود ستارز كافية',
+                            '20 - 30',
+                          ),
+                        ],
                       ),
-                      ProductItem(
-                        '1',
-                        'assets/images/product/pro2.jpg',
-                        'هوليود ستارز كافية',
-                        '20 - 30',
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

@@ -49,193 +49,195 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-            Container(
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildIcon(
-                    context,
-                    Colors.white,
-                    Icon(
-                      Icons.arrow_back_ios,
-                      color: primaryColor,
-                    ),
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  buildIcon(
-                    context,
-                    Colors.white,
-                    Icon(
-                      Icons.shopping_cart_outlined,
-                      color: primaryColor,
-                    ),
-                    () {},
-                  ),
-                ],
-              ),
-            ),
-            Card(
-              elevation: 1,
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                color: Colors.white,
-                child: Column(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(
-                      widget.imageUrl,
-                      fit: BoxFit.cover,
+                    buildIcon(
+                      context,
+                      Colors.white,
+                      Icon(
+                        Icons.arrow_back_ios,
+                        color: primaryColor,
+                      ),
+                      () {
+                        Navigator.of(context).pop();
+                      },
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        buildIcon(
-                          context,
-                          primaryColor,
-                          FaIcon(
-                            FontAwesomeIcons.minus,
-                            color: Colors.white,
-                          ),
-                          () {
-                            setState(() {
-                              _counter--;
-                            });
-                          },
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Text(
-                            '$_counter',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                        buildIcon(
-                          context,
-                          primaryColor,
-                          FaIcon(
-                            FontAwesomeIcons.plus,
-                            color: Colors.white,
-                          ),
-                          () {
-                            setState(() {
-                              _counter++;
-                            });
-                          },
-                        ),
-                      ],
+                    buildIcon(
+                      context,
+                      Colors.white,
+                      Icon(
+                        Icons.shopping_cart_outlined,
+                        color: primaryColor,
+                      ),
+                      () {},
                     ),
                   ],
                 ),
               ),
-            ),
-            Directionality(
-              textDirection: TextDirection.rtl,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      child: Text(
-                        'عنوان الطعام',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          fontFamily: 'Cairo',
-                          fontSize: 22,
-                        ),
+              Card(
+                elevation: 1,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        widget.imageUrl,
+                        fit: BoxFit.cover,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.03),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            child: Row(
-                              children: [
-                                Icon(Icons.favorite, color: primaryColor),
-                                SizedBox(width: 2),
-                                Text(
-                                  '5',
-                                  style: TextStyle(
-                                    fontFamily: 'Cairo',
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ],
+                          buildIcon(
+                            context,
+                            primaryColor,
+                            FaIcon(
+                              FontAwesomeIcons.minus,
+                              color: Colors.white,
+                            ),
+                            () {
+                              setState(() {
+                                _counter--;
+                              });
+                            },
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: Text(
+                              '$_counter',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
                             ),
                           ),
-                          Container(
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.star_border_outlined,
-                                  color: primaryColor,
-                                ),
-                                SizedBox(width: 2),
-                                Text(
-                                  'التقيمات 5',
-                                  style: TextStyle(
-                                    fontFamily: 'Cairo',
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ],
+                          buildIcon(
+                            context,
+                            primaryColor,
+                            FaIcon(
+                              FontAwesomeIcons.plus,
+                              color: Colors.white,
                             ),
+                            () {
+                              setState(() {
+                                _counter++;
+                              });
+                            },
                           ),
                         ],
                       ),
-                    ),
-                    Text(
-                      'تفاصيل الطعام تفاصيل الطعام تفاصيل الطعام تفاصيل الطعام تفاصيل الطعامتفاصيل الطعام تفاصيل الطعام تفاصيل الطعام',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Cairo',
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      child: Text(
-                        'وقت التوصيل',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          fontFamily: 'Cairo',
-                          fontSize: 22,
-                        ),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.timer),
-                        SizedBox(width: 5),
-                        Text(
-                          '${widget.duration} دقيقة',
+                    ],
+                  ),
+                ),
+              ),
+              Directionality(
+                textDirection: TextDirection.rtl,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        child: Text(
+                          'عنوان الطعام',
                           textAlign: TextAlign.right,
                           style: TextStyle(
                             fontFamily: 'Cairo',
-                            fontSize: 18,
+                            fontSize: 22,
                           ),
                         ),
-                      ],
-                    )
-                  ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              child: Row(
+                                children: [
+                                  Icon(Icons.favorite, color: primaryColor),
+                                  SizedBox(width: 2),
+                                  Text(
+                                    '5',
+                                    style: TextStyle(
+                                      fontFamily: 'Cairo',
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.star_border_outlined,
+                                    color: primaryColor,
+                                  ),
+                                  SizedBox(width: 2),
+                                  Text(
+                                    'التقيمات 5',
+                                    style: TextStyle(
+                                      fontFamily: 'Cairo',
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        'تفاصيل الطعام تفاصيل الطعام تفاصيل الطعام تفاصيل الطعام تفاصيل الطعامتفاصيل الطعام تفاصيل الطعام تفاصيل الطعام',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'Cairo',
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        child: Text(
+                          'وقت التوصيل',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontFamily: 'Cairo',
+                            fontSize: 22,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.timer),
+                          SizedBox(width: 5),
+                          Text(
+                            '${widget.duration} دقيقة',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              fontFamily: 'Cairo',
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
